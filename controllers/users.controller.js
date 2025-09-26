@@ -1,5 +1,5 @@
 export const getUsers = (req, res) => {
-  res.json({ msg: "getUsers called hi 56" });
+  res.json({ msg: "getUsers called hi 565" });
 };
 
 // router.get("/users", (req, res) => {
