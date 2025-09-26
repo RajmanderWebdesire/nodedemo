@@ -2,7 +2,10 @@ import User from "../user.model.js";
 
 export const getUsers = async (req, res) => {
   try {
-    const userData = await User.save({ username: "rajmander singh" });
+    console.log("first");
+    const userData = await new User({ username: "rajmander singh" }).save();
+
+    console.log(">>>>>>>>>>>>>>>>>>>>", userData);
     return res.json({ msg: userData });
   } catch (err) {
     return res.json({ msg: err });
