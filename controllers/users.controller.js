@@ -21,6 +21,15 @@ export const getUsers = async (req, res) => {
   }
 };
 
+export const getUserById = async (req, res) => {
+  try {
+    const user = await User.findById("68d68ade9b4d58e00132bbf3");
+    return res.json({ msg: user });
+  } catch (err) {
+    return res.json({ msg: err });
+  }
+};
+
 // router.get("/users", (req, res) => {
 //   res.json({ msg: "all users" });
 // });
