@@ -12,6 +12,15 @@ export const saveUser = async (req, res) => {
   }
 };
 
+export const getUsers = async () => {
+  try {
+    const users = await User.find();
+    return res.json({ msg: users });
+  } catch (err) {
+    return res.json({ msg: err });
+  }
+};
+
 // router.get("/users", (req, res) => {
 //   res.json({ msg: "all users" });
 // });
