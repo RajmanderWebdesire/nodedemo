@@ -1,0 +1,12 @@
+import mongoose from "mongoose";
+
+export const dbConnect = () => {
+  try {
+    mongoose.connect(
+      "mongodb+srv://rajmanderdev_db_user:ucbH5TamNuHzQbFe@rajcluster.k52h8mf.mongodb.net/"
+    );
+    console.log("Connection success");
+  } catch (err) {
+    console.log("Error in db connection ", err);
+  }
+};

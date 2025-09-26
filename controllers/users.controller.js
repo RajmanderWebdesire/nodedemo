@@ -1,5 +1,12 @@
-export const getUsers = (req, res) => {
-  res.json({ msg: "First ever 125" });
+import User from "../user.model.js";
+
+export const getUsers = async (req, res) => {
+  try {
+    const userData = await User.save({ username: "rajmander singh" });
+    return res.json({ msg: userData });
+  } catch (err) {
+    return res.json({ msg: err });
+  }
 };
 
 // router.get("/users", (req, res) => {

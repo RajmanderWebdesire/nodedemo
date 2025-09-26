@@ -1,6 +1,10 @@
 import express from "express";
 const app = express();
 
+import { dbConnect } from "./dbConnect.js";
+
+dbConnect();
+
 import userRouter from "./routes/users.routes.js";
 
 app.use("/api/v1", userRouter);
