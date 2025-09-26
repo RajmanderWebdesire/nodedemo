@@ -12,7 +12,7 @@ export const saveUser = async (req, res) => {
   }
 };
 
-export const getUsers = async () => {
+export const getUsers = async (req, res) => {
   try {
     const users = await User.find();
     return res.json({ msg: users });
