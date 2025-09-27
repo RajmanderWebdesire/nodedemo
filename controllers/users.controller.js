@@ -63,6 +63,17 @@ export const updateUser = async (req, res) => {
   return res.json({ msg: user });
 };
 
+export const findByIdAndUpdate = async (req, res) => {
+  const id = req.params.id;
+  const { changename } = req.body;
+  const userData = await User.findByIdAndUpdate(
+    id,
+    { username: changename },
+    { new: true }
+  );
+  res.status(200).json({ data: userData });
+};
+
 export const deleteUser = async (req, res) => {
   const { username } = req.body;
   const user = await User.findOneAndDelete({ username }); //68d68ade9b4d58e00132bbf3

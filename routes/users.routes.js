@@ -10,6 +10,7 @@ import {
   updateUser,
   deleteUser,
   findByIdDelete,
+  findByIdAndUpdate,
 } from "../controllers/users.controller.js";
 
 const router = express.Router();
@@ -23,5 +24,6 @@ router.get("/users/name/search", getUserByFindOne);
 router.put("/users", updateUser);
 router.delete("/users", deleteUser);
 router.delete("/users/byid", findByIdDelete);
+router.put("/users/updating/:id", findByIdAndUpdate);
 
 export default router;
