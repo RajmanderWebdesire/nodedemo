@@ -3,9 +3,9 @@ import User from "../user.model.js";
 // Save User
 export const saveUser = async (req, res) => {
   try {
-    const { username } = req.body;
-    console.log("==== Username ====", username);
-    const userData = await new User({ username }).save();
+    const { username, city } = req.body;
+    console.log("==== Username ====", username, city);
+    const userData = await new User({ username, city }).save();
 
     console.log(">>>>>>>>>>>>>>>>>>>>", userData);
     return res.status(201).json({ msg: userData });
@@ -89,4 +89,17 @@ export const findByIdDelete = async (req, res) => {
     return res.status(404).json({ msg: "user not found" });
   }
   //console.log("Type of = user ", typeof user, "user>>>", user);
+};
+
+export const countUsers = async (req, res) => {
+  console.log("fine");
+  let users = await User.aggregate([
+    {
+      $group: {
+        _id: "$city",
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+  console.log(users);
 };
