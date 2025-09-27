@@ -1,9 +1,11 @@
 import User from "../user.model.js";
 
+// Save User
 export const saveUser = async (req, res) => {
   try {
-    console.log("first");
-    const userData = await new User({ username: "rajmander singh" }).save();
+    const { username } = req.body;
+    console.log("==== Username ====", username);
+    const userData = await new User({ username }).save();
 
     console.log(">>>>>>>>>>>>>>>>>>>>", userData);
     return res.json({ msg: userData });
@@ -12,6 +14,7 @@ export const saveUser = async (req, res) => {
   }
 };
 
+// Get Users
 export const getUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -21,6 +24,24 @@ export const getUsers = async (req, res) => {
   }
 };
 
+export const getDesign = (req, res) => {
+  const age = req.query.age;
+  console.log("getDesign");
+  res.json({ msg: "getDesign " + age });
+};
+
+// Get users by findOne
+export const getUserByFindOne = async (req, res) => {
+  const username = req.query.username;
+  //const user = await User.findOne({ username: username });
+  const user = await User.findOne({
+    username: new RegExp(`^${username}$`, "i"),
+  });
+
+  return res.status(200).json({ status: true, data: user });
+};
+
+// Get User By Id
 export const getUserById = async (req, res) => {
   try {
     const user = await User.findById("68d68ade9b4d58e00132bbf3");
@@ -29,24 +50,3 @@ export const getUserById = async (req, res) => {
     return res.json({ msg: err });
   }
 };
-
-// router.get("/users", (req, res) => {
-//   res.json({ msg: "all users" });
-// });
-
-// router.get("/users/:id", (req, res) => {
-//   const id = req.params.id;
-//   res.json({ msg: id });
-// });
-
-// router.put("/users/:id", (req, res) => {
-//   res.json({ msg: req.params.id });
-// });
-
-// router.delete("/users/:id", (req, res) => {
-//   res.json({ msg: req.params.id });
-// });
-
-// app.post("/users", (req, res) => {
-//   res.json({ msg: "post method save" });
-// });
