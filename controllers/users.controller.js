@@ -68,7 +68,7 @@ export const findByIdAndUpdate = async (req, res) => {
   const { username } = req.body;
   const userData = await User.findByIdAndUpdate(
     id,
-    { username: changename },
+    { username: username },
     { new: true }
   );
   res.status(200).json({ data: userData });
