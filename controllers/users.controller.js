@@ -70,7 +70,7 @@ export const deleteUser = async (req, res) => {
 };
 
 export const findByIdDelete = async (req, res) => {
-  const user = await User.findByIdAndDelete("68d68be29f3121fa6559333c");
+  const user = await User.findByIdAndDelete("68d7518e4480bd1dab42e34e");
 
   if (user !== null) {
     return res.status(200).json({ msg: "user deleted" });
