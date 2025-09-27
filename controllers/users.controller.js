@@ -97,7 +97,7 @@ export const countUsers = async (req, res) => {
     {
       $group: {
         _id: "$city",
-        count: { $sum: 1 },
+        countCities: { $sum: 1 },
       },
     },
   ]);
