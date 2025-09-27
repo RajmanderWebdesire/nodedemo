@@ -8,9 +8,9 @@ export const saveUser = async (req, res) => {
     const userData = await new User({ username }).save();
 
     console.log(">>>>>>>>>>>>>>>>>>>>", userData);
-    return res.json({ msg: userData });
+    return res.status(201).json({ msg: userData });
   } catch (err) {
-    return res.json({ msg: err });
+    return res.status(500).json({ msg: err });
   }
 };
 
@@ -18,6 +18,7 @@ export const saveUser = async (req, res) => {
 export const getUsers = async (req, res) => {
   try {
     const users = await User.find();
+    console.table(users.map((user) => user.toObject()));
     return res.json({ msg: users });
   } catch (err) {
     return res.json({ msg: err });
@@ -49,4 +50,32 @@ export const getUserById = async (req, res) => {
   } catch (err) {
     return res.json({ msg: err });
   }
+};
+
+// update by findOneAndUpdate
+export const updateUser = async (req, res) => {
+  const { username, changename } = req.body;
+  const user = await User.findOneAndUpdate(
+    { username },
+    { username: changename },
+    { new: true }
+  );
+  return res.json({ msg: user });
+};
+
+export const deleteUser = async (req, res) => {
+  const { username } = req.body;
+  const user = await User.findOneAndDelete({ username }); //68d68ade9b4d58e00132bbf3
+  return res.json({ msg: user });
+};
+
+export const findByIdDelete = async (req, res) => {
+  const user = await User.findByIdAndDelete("68d68be29f3121fa6559333c");
+
+  if (user !== null) {
+    return res.status(200).json({ msg: "user deleted" });
+  } else {
+    return res.status(404).json({ msg: "user not found" });
+  }
+  //console.log("Type of = user ", typeof user, "user>>>", user);
 };
